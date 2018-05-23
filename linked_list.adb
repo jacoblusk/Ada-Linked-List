@@ -1,17 +1,51 @@
-package body Linked_List is
-    procedure Add_Node(The_List: in out List; New_Node: in Node_Ref) is
-        Temp_Node : Node_Ref;
+with ada.text_io;
+
+package body linked_list is
+    procedure append(the_list: in out list; value: in t) is
+        temp_node : node_ptr;
+        new_node : node_ptr;
     begin
-        Temp_Node := The_List.Head;
-        if Temp_Node = null then
-            The_List.Head := New_Node;
+        temp_node := the_list.head;
+        new_node := new node'(value, null);
+        if the_list.head = null then
+            the_list.head := new_node;
         else
-            while Temp_Node.Next /= null loop
-                Temp_Node := Temp_Node.Next;
+            while temp_node.next /= null loop
+                temp_node := temp_node.next;
             end loop;
-
-            Temp_Node.Next := New_Node;
+            temp_node.next := new_node;
         end if;
+    end append;
 
-    end Add_Node;
-end Linked_List;
+    procedure remove(the_list: in out list; value: in t) is
+        temp_node : node_ptr;
+        prev_node : node_ptr;
+    begin
+        temp_node := the_list.head;
+        iterate_loop:
+        while temp_node /= null loop
+            if temp_node.value = value then
+                if temp_node = the_list.head then
+                    the_list.head := temp_node.next;
+                    free(temp_node);
+                else
+                    prev_node.next := temp_node.next;
+                    free(temp_node);
+                end if;
+                exit iterate_loop;
+            end if;
+            prev_node := temp_node;
+            temp_node := temp_node.next;
+        end loop iterate_loop;
+    end remove;
+
+    procedure print(the_list: in list) is
+        temp_node : node_ptr;
+    begin
+        temp_node := the_list.head;
+        while temp_node /= null loop
+            ada.text_io.put_line("value:" & image(temp_node.value));
+            temp_node := temp_node.next;
+        end loop;
+    end print;
+end linked_list;

@@ -1,13 +1,13 @@
-with Ada.Text_IO;
-with Linked_List;
+with ada.text_io;
+with linked_list;
 
-procedure Int_List_Example is
-    package Int_List is new Linked_List(T => Integer);
-    My_List: Int_List.List;
-    New_Node: Int_List.Node_Ref;
+procedure int_list_example is
+    package int_list is new linked_list(t => integer, image => integer'image);
+    my_list: int_list.list;
 begin
-    New_Node := new Int_List.Node'(1, null);
-    Int_List.Add_Node(My_List, New_Node);
-
-    Ada.Text_IO.Put_Line("Added new node with value: " & Integer'Image(New_Node.Value));
-end Int_List_Example;
+    int_list.append(my_list, 1);
+    int_list.append(my_list, 2);
+    int_list.print(my_list);
+    int_list.remove(my_list, 2);
+    int_list.print(my_list);
+end int_list_example;
