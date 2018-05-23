@@ -18,6 +18,7 @@ package linked_list is
     end record;
 
     procedure append(the_list: in out list; value: t);
+    procedure prepend(the_list: in out list; value: in t);
     procedure remove(the_list: in out list; value: t);
     procedure print(the_list: in list);
     procedure free is new ada.unchecked_deallocation(

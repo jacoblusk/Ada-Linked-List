@@ -17,6 +17,13 @@ package body linked_list is
         end if;
     end append;
 
+    procedure prepend(the_list: in out list; value: in t) is
+        new_node : node_ptr;
+    begin
+        new_node := new node'(value, the_list.head);
+        the_list.head := new_node;
+    end prepend;
+
     procedure remove(the_list: in out list; value: in t) is
         temp_node : node_ptr;
         prev_node : node_ptr;

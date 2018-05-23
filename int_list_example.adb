@@ -6,7 +6,7 @@ procedure int_list_example is
     my_list: int_list.list;
 begin
     int_list.append(my_list, 1);
-    int_list.append(my_list, 2);
+    int_list.prepend(my_list, 2);
     int_list.print(my_list);
     int_list.remove(my_list, 2);
     int_list.print(my_list);
